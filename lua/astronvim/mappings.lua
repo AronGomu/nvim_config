@@ -13,8 +13,8 @@ local sections = {
   u = { desc = get_icon("Window", 1, true) .. "UI/UX" },
   b = { desc = get_icon("Tab", 1, true) .. "Buffers" },
   bs = { desc = get_icon("Sort", 1, true) .. "Sort Buffers" },
-  d = { desc = get_icon("Debugger", 1, true) .. "Debugger" },
-  g = { desc = get_icon("Git", 1, true) .. "Git" },
+  m = { desc = get_icon("Debugger", 1, true) .. "Debugger" },
+  -- g = { desc = get_icon("Git", 1, true) .. "Git" },
   S = { desc = get_icon("Session", 1, true) .. "Session" },
   t = { desc = get_icon("Terminal", 1, true) .. "Terminal" },
 }
@@ -24,10 +24,10 @@ local sections = {
 maps.n["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor down" }
 maps.n["k"] = { "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Move cursor up" }
 maps.n["<leader>w"] = { "<cmd>w<cr>", desc = "Save" }
-maps.n["<leader>q"] = { "<cmd>confirm q<cr>", desc = "Quit" }
-maps.n["<leader>n"] = { "<cmd>enew<cr>", desc = "New File" }
-maps.n["<C-s>"] = { "<cmd>w!<cr>", desc = "Force write" }
-maps.n["<C-q>"] = { "<cmd>qa!<cr>", desc = "Force quit" }
+-- maps.n["<leader>q"] = { "<cmd>confirm q<cr>", desc = "Quit" }
+-- maps.n["<leader>n"] = { "<cmd>enew<cr>", desc = "New File" }
+-- maps.n["<C-s>"] = { "<cmd>w!<cr>", desc = "Force write" }
+-- maps.n["<C-q>"] = { "<cmd>qa!<cr>", desc = "Force quit" }
 maps.n["|"] = { "<cmd>vsplit<cr>", desc = "Vertical Split" }
 maps.n["\\"] = { "<cmd>split<cr>", desc = "Horizontal Split" }
 -- TODO: Remove when dropping support for <Neovim v0.10
@@ -122,18 +122,18 @@ maps.n["]t"] = { function() vim.cmd.tabnext() end, desc = "Next tab" }
 maps.n["[t"] = { function() vim.cmd.tabprevious() end, desc = "Previous tab" }
 
 -- Alpha
-if is_available "alpha-nvim" then
-  maps.n["<leader>h"] = {
-    function()
-      local wins = vim.api.nvim_tabpage_list_wins(0)
-      if #wins > 1 and vim.api.nvim_get_option_value("filetype", { win = wins[1] }) == "neo-tree" then
-        vim.fn.win_gotoid(wins[2]) -- go to non-neo-tree window to toggle alpha
-      end
-      require("alpha").start(false, require("alpha").default_config)
-    end,
-    desc = "Home Screen",
-  }
-end
+-- if is_available "alpha-nvim" then
+--   maps.n["<leader>h"] = {
+--     function()
+--       local wins = vim.api.nvim_tabpage_list_wins(0)
+--       if #wins > 1 and vim.api.nvim_get_option_value("filetype", { win = wins[1] }) == "neo-tree" then
+--         vim.fn.win_gotoid(wins[2]) -- go to non-neo-tree window to toggle alpha
+--       end
+--       require("alpha").start(false, require("alpha").default_config)
+--     end,
+--     desc = "Home Screen",
+--   }
+-- end
 
 -- Comment
 if is_available "Comment.nvim" then
@@ -148,20 +148,20 @@ if is_available "Comment.nvim" then
 end
 
 -- GitSigns
-if is_available "gitsigns.nvim" then
-  maps.n["<leader>g"] = sections.g
-  maps.n["]g"] = { function() require("gitsigns").next_hunk() end, desc = "Next Git hunk" }
-  maps.n["[g"] = { function() require("gitsigns").prev_hunk() end, desc = "Previous Git hunk" }
-  maps.n["<leader>gl"] = { function() require("gitsigns").blame_line() end, desc = "View Git blame" }
-  maps.n["<leader>gL"] = { function() require("gitsigns").blame_line { full = true } end, desc = "View full Git blame" }
-  maps.n["<leader>gp"] = { function() require("gitsigns").preview_hunk() end, desc = "Preview Git hunk" }
-  maps.n["<leader>gh"] = { function() require("gitsigns").reset_hunk() end, desc = "Reset Git hunk" }
-  maps.n["<leader>gr"] = { function() require("gitsigns").reset_buffer() end, desc = "Reset Git buffer" }
-  maps.n["<leader>gs"] = { function() require("gitsigns").stage_hunk() end, desc = "Stage Git hunk" }
-  maps.n["<leader>gS"] = { function() require("gitsigns").stage_buffer() end, desc = "Stage Git buffer" }
-  maps.n["<leader>gu"] = { function() require("gitsigns").undo_stage_hunk() end, desc = "Unstage Git hunk" }
-  maps.n["<leader>gd"] = { function() require("gitsigns").diffthis() end, desc = "View Git diff" }
-end
+-- if is_available "gitsigns.nvim" then
+--   maps.n["<leader>g"] = sections.g
+--   maps.n["]g"] = { function() require("gitsigns").next_hunk() end, desc = "Next Git hunk" }
+--   maps.n["[g"] = { function() require("gitsigns").prev_hunk() end, desc = "Previous Git hunk" }
+--   maps.n["<leader>gl"] = { function() require("gitsigns").blame_line() end, desc = "View Git blame" }
+--   maps.n["<leader>gL"] = { function() require("gitsigns").blame_line { full = true } end, desc = "View full Git blame" }
+--   maps.n["<leader>gp"] = { function() require("gitsigns").preview_hunk() end, desc = "Preview Git hunk" }
+--   maps.n["<leader>gh"] = { function() require("gitsigns").reset_hunk() end, desc = "Reset Git hunk" }
+--   maps.n["<leader>gr"] = { function() require("gitsigns").reset_buffer() end, desc = "Reset Git buffer" }
+--   maps.n["<leader>gs"] = { function() require("gitsigns").stage_hunk() end, desc = "Stage Git hunk" }
+--   maps.n["<leader>gS"] = { function() require("gitsigns").stage_buffer() end, desc = "Stage Git buffer" }
+--   maps.n["<leader>gu"] = { function() require("gitsigns").undo_stage_hunk() end, desc = "Unstage Git hunk" }
+--   maps.n["<leader>gd"] = { function() require("gitsigns").diffthis() end, desc = "View Git diff" }
+-- end
 
 -- NeoTree
 if is_available "neo-tree.nvim" then
@@ -237,19 +237,19 @@ end
 -- Telescope
 if is_available "telescope.nvim" then
   maps.n["<leader>f"] = sections.f
-  maps.n["<leader>g"] = sections.g
-  maps.n["<leader>gb"] =
-    { function() require("telescope.builtin").git_branches { use_file_path = true } end, desc = "Git branches" }
-  maps.n["<leader>gc"] = {
-    function() require("telescope.builtin").git_commits { use_file_path = true } end,
-    desc = "Git commits (repository)",
-  }
-  maps.n["<leader>gC"] = {
-    function() require("telescope.builtin").git_bcommits { use_file_path = true } end,
-    desc = "Git commits (current file)",
-  }
-  maps.n["<leader>gt"] =
-    { function() require("telescope.builtin").git_status { use_file_path = true } end, desc = "Git status" }
+  -- maps.n["<leader>g"] = sections.g
+  -- maps.n["<leader>gb"] =
+  --   { function() require("telescope.builtin").git_branches { use_file_path = true } end, desc = "Git branches" }
+  -- maps.n["<leader>gc"] = {
+  --   function() require("telescope.builtin").git_commits { use_file_path = true } end,
+  --   desc = "Git commits (repository)",
+  -- }
+  -- maps.n["<leader>gC"] = {
+  --   function() require("telescope.builtin").git_bcommits { use_file_path = true } end,
+  --   desc = "Git commits (current file)",
+  -- }
+  -- maps.n["<leader>gt"] =
+  --   { function() require("telescope.builtin").git_status { use_file_path = true } end, desc = "Git status" }
   maps.n["<leader>f<CR>"] = { function() require("telescope.builtin").resume() end, desc = "Resume previous search" }
   maps.n["<leader>f'"] = { function() require("telescope.builtin").marks() end, desc = "Find marks" }
   maps.n["<leader>f/"] =
@@ -354,8 +354,8 @@ if is_available "toggleterm.nvim" then
 end
 
 if is_available "nvim-dap" then
-  maps.n["<leader>d"] = sections.d
-  maps.v["<leader>d"] = sections.d
+  maps.n["<leader>m"] = sections.m
+  maps.v["<leader>m"] = sections.m
   -- modified function keys found with `showkey -a` in the terminal to get key code
   -- run `nvim -V3log +quit` and search through the "Terminal info" in the `log` file for the correct keyname
   maps.n["<F5>"] = { function() require("dap").continue() end, desc = "Debugger: Start" }
@@ -374,10 +374,10 @@ if is_available "nvim-dap" then
   maps.n["<F10>"] = { function() require("dap").step_over() end, desc = "Debugger: Step Over" }
   maps.n["<F11>"] = { function() require("dap").step_into() end, desc = "Debugger: Step Into" }
   maps.n["<F23>"] = { function() require("dap").step_out() end, desc = "Debugger: Step Out" } -- Shift+F11
-  maps.n["<leader>db"] = { function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint (F9)" }
-  maps.n["<leader>dB"] = { function() require("dap").clear_breakpoints() end, desc = "Clear Breakpoints" }
-  maps.n["<leader>dc"] = { function() require("dap").continue() end, desc = "Start/Continue (F5)" }
-  maps.n["<leader>dC"] = {
+  maps.n["<leader>mb"] = { function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint (F9)" }
+  maps.n["<leader>mB"] = { function() require("dap").clear_breakpoints() end, desc = "Clear Breakpoints" }
+  maps.n["<leader>mc"] = { function() require("dap").continue() end, desc = "Start/Continue (F5)" }
+  maps.n["<leader>mC"] = {
     function()
       vim.ui.input({ prompt = "Condition: " }, function(condition)
         if condition then require("dap").set_breakpoint(condition) end
@@ -385,18 +385,18 @@ if is_available "nvim-dap" then
     end,
     desc = "Conditional Breakpoint (S-F9)",
   }
-  maps.n["<leader>di"] = { function() require("dap").step_into() end, desc = "Step Into (F11)" }
-  maps.n["<leader>do"] = { function() require("dap").step_over() end, desc = "Step Over (F10)" }
-  maps.n["<leader>dO"] = { function() require("dap").step_out() end, desc = "Step Out (S-F11)" }
-  maps.n["<leader>dq"] = { function() require("dap").close() end, desc = "Close Session" }
-  maps.n["<leader>dQ"] = { function() require("dap").terminate() end, desc = "Terminate Session (S-F5)" }
-  maps.n["<leader>dp"] = { function() require("dap").pause() end, desc = "Pause (F6)" }
-  maps.n["<leader>dr"] = { function() require("dap").restart_frame() end, desc = "Restart (C-F5)" }
-  maps.n["<leader>dR"] = { function() require("dap").repl.toggle() end, desc = "Toggle REPL" }
-  maps.n["<leader>ds"] = { function() require("dap").run_to_cursor() end, desc = "Run To Cursor" }
+  maps.n["<leader>mi"] = { function() require("dap").step_into() end, desc = "Step Into (F11)" }
+  maps.n["<leader>mo"] = { function() require("dap").step_over() end, desc = "Step Over (F10)" }
+  maps.n["<leader>mO"] = { function() require("dap").step_out() end, desc = "Step Out (S-F11)" }
+  maps.n["<leader>mq"] = { function() require("dap").close() end, desc = "Close Session" }
+  maps.n["<leader>mQ"] = { function() require("dap").terminate() end, desc = "Terminate Session (S-F5)" }
+  maps.n["<leader>mp"] = { function() require("dap").pause() end, desc = "Pause (F6)" }
+  maps.n["<leader>mr"] = { function() require("dap").restart_frame() end, desc = "Restart (C-F5)" }
+  maps.n["<leader>mR"] = { function() require("dap").repl.toggle() end, desc = "Toggle REPL" }
+  maps.n["<leader>ms"] = { function() require("dap").run_to_cursor() end, desc = "Run To Cursor" }
 
   if is_available "nvim-dap-ui" then
-    maps.n["<leader>dE"] = {
+    maps.n["<leader>mE"] = {
       function()
         vim.ui.input({ prompt = "Expression: " }, function(expr)
           if expr then require("dapui").eval(expr, { enter = true }) end
@@ -404,9 +404,9 @@ if is_available "nvim-dap" then
       end,
       desc = "Evaluate Input",
     }
-    maps.v["<leader>dE"] = { function() require("dapui").eval() end, desc = "Evaluate Input" }
-    maps.n["<leader>du"] = { function() require("dapui").toggle() end, desc = "Toggle Debugger UI" }
-    maps.n["<leader>dh"] = { function() require("dap.ui.widgets").hover() end, desc = "Debugger Hover" }
+    maps.v["<leader>mE"] = { function() require("dapui").eval() end, desc = "Evaluate Input" }
+    maps.n["<leader>mu"] = { function() require("dapui").toggle() end, desc = "Toggle Debugger UI" }
+    maps.n["<leader>mh"] = { function() require("dap.ui.widgets").hover() end, desc = "Debugger Hover" }
   end
 end
 
@@ -453,4 +453,9 @@ maps.n["<leader>uw"] = { ui.toggle_wrap, desc = "Toggle wrap" }
 maps.n["<leader>uy"] = { ui.toggle_syntax, desc = "Toggle syntax highlighting (buffer)" }
 maps.n["<leader>uh"] = { ui.toggle_foldcolumn, desc = "Toggle foldcolumn" }
 
+-- Custom mappings
+maps.n["<leader>n"] = { "o<Esc>", desc = "New line" }
+
 utils.set_mappings(astronvim.user_opts("mappings", maps))
+
+
