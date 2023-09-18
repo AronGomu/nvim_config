@@ -1,6 +1,0 @@
--- For more info check : https://astronvim.com/recipes/mappings
--- return {
---     mappings = {
---          
---     }  
--- }

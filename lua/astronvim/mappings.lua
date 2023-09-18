@@ -453,9 +453,6 @@ maps.n["<leader>uw"] = { ui.toggle_wrap, desc = "Toggle wrap" }
 maps.n["<leader>uy"] = { ui.toggle_syntax, desc = "Toggle syntax highlighting (buffer)" }
 maps.n["<leader>uh"] = { ui.toggle_foldcolumn, desc = "Toggle foldcolumn" }
 
--- Custom mappings
-maps.n["<leader>n"] = { "o<Esc>", desc = "New line" }
-
 utils.set_mappings(astronvim.user_opts("mappings", maps))
 
 
